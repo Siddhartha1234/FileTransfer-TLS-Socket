@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/54c1c2b8/
+SSLSocket	ssl.cpp	/^   SSLSocket() {$/;"	f	class:SSLSocket	file:
+SSLSocket	ssl.cpp	/^class SSLSocket {$/;"	c	file:
+Server	server.cpp	/^  Server(int port_number, int max_num_clients, string cert_path, string prv_key_path, string cha/;"	f	class:Server	file:
+Server	server.cpp	/^class Server : public SSLSocket {$/;"	c	file:
+accept_clients	server.cpp	/^  void accept_clients(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:Server	typeref:typename:void	file:
+cSSL	ssl.cpp	/^   SSL *cSSL;$/;"	m	class:SSLSocket	typeref:typename:SSL *	file:
+max_num_clients	server.cpp	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int	file:
+port_number	server.cpp	/^  int port_number;$/;"	m	class:Server	typeref:typename:int	file:
+server_address	server.cpp	/^  struct sockaddr_in server_address;$/;"	m	class:Server	typeref:struct:sockaddr_in	file:
+setCertificates	ssl.cpp	/^   void setCertificates(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:SSLSocket	typeref:typename:void	file:
+set_ssl_params	server.cpp	/^  void set_ssl_params(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:Server	typeref:typename:void	file:
+sockfd	server.cpp	/^  int sockfd;$/;"	m	class:Server	typeref:typename:int	file:
+sslctx	ssl.cpp	/^   SSL_CTX *sslctx;$/;"	m	class:SSLSocket	typeref:typename:SSL_CTX *	file:
+~SSLSocket	ssl.cpp	/^   ~SSLSocket() {$/;"	f	class:SSLSocket	file:
