@@ -5,17 +5,33 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/54c1c2b8/
-SSLSocket	ssl.cpp	/^   SSLSocket() {$/;"	f	class:SSLSocket	file:
-SSLSocket	ssl.cpp	/^class SSLSocket {$/;"	c	file:
-Server	server.cpp	/^  Server(int port_number, int max_num_clients, string cert_path, string prv_key_path, string cha/;"	f	class:Server	file:
-Server	server.cpp	/^class Server : public SSLSocket {$/;"	c	file:
-accept_clients	server.cpp	/^  void accept_clients(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:Server	typeref:typename:void	file:
-cSSL	ssl.cpp	/^   SSL *cSSL;$/;"	m	class:SSLSocket	typeref:typename:SSL *	file:
-max_num_clients	server.cpp	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int	file:
-port_number	server.cpp	/^  int port_number;$/;"	m	class:Server	typeref:typename:int	file:
-server_address	server.cpp	/^  struct sockaddr_in server_address;$/;"	m	class:Server	typeref:struct:sockaddr_in	file:
-setCertificates	ssl.cpp	/^   void setCertificates(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:SSLSocket	typeref:typename:void	file:
-set_ssl_params	server.cpp	/^  void set_ssl_params(string cert_path, string prv_key_path, string chain_path) {$/;"	f	class:Server	typeref:typename:void	file:
-sockfd	server.cpp	/^  int sockfd;$/;"	m	class:Server	typeref:typename:int	file:
-sslctx	ssl.cpp	/^   SSL_CTX *sslctx;$/;"	m	class:SSLSocket	typeref:typename:SSL_CTX *	file:
-~SSLSocket	ssl.cpp	/^   ~SSLSocket() {$/;"	f	class:SSLSocket	file:
+Application	application.cpp	/^Application::Application(string mode) { this->mode = mode; }$/;"	f	class:Application
+Application	application.h	/^class Application {$/;"	c
+Client	client.cpp	/^Client::Client(string server_addr, int serv_port_number) {$/;"	f	class:Client
+Client	client.h	/^class Client : public SSLSocket {$/;"	c
+SSLSocket	ssl.cpp	/^SSLSocket::SSLSocket() {$/;"	f	class:SSLSocket
+SSLSocket	ssl.h	/^class SSLSocket {$/;"	c
+Server	server.cpp	/^Server::Server(int port_number, int max_num_clients, int max_buffer_size) {$/;"	f	class:Server
+Server	server.h	/^class Server : public SSLSocket {$/;"	c
+accept_clients	server.cpp	/^void Server::accept_clients() {$/;"	f	class:Server	typeref:typename:void
+cSSL	ssl.h	/^  SSL *cSSL;$/;"	m	class:SSLSocket	typeref:typename:SSL *
+client	application.h	/^  Client *client;$/;"	m	class:Application	typeref:typename:Client *
+config_certificates	application.cpp	/^void Application::config_certificates(string cert_path, string prv_path,$/;"	f	class:Application	typeref:typename:void
+config_client	application.cpp	/^void Application::config_client(string server_addr, int serv_port_number) {$/;"	f	class:Application	typeref:typename:void
+config_server	application.cpp	/^void Application::config_server(int port_number, int max_num_clients,$/;"	f	class:Application	typeref:typename:void
+main	test_app.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+max_buffer_size	server.h	/^  int max_buffer_size;$/;"	m	class:Server	typeref:typename:int
+max_num_clients	server.h	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int
+mode	application.h	/^  string mode;$/;"	m	class:Application	typeref:typename:string
+port_number	server.h	/^  int port_number;$/;"	m	class:Server	typeref:typename:int
+run	application.cpp	/^void Application::run() {$/;"	f	class:Application	typeref:typename:void
+send_msg	client.cpp	/^void Client::send_msg(string message) {$/;"	f	class:Client	typeref:typename:void
+send_msg	server.cpp	/^void Server::send_msg(string message) {$/;"	f	class:Server	typeref:typename:void
+server	application.h	/^  Server *server;$/;"	m	class:Application	typeref:typename:Server *
+server_address	client.h	/^  struct sockaddr_in server_address;$/;"	m	class:Client	typeref:struct:sockaddr_in
+server_address	server.h	/^  struct sockaddr_in server_address;$/;"	m	class:Server	typeref:struct:sockaddr_in
+set_certificates	ssl.cpp	/^void SSLSocket::set_certificates(string cert_path, string prv_key_path,$/;"	f	class:SSLSocket	typeref:typename:void
+sockfd	client.h	/^  int sockfd;$/;"	m	class:Client	typeref:typename:int
+sockfd	server.h	/^  int sockfd;$/;"	m	class:Server	typeref:typename:int
+sslctx	ssl.h	/^  SSL_CTX *sslctx;$/;"	m	class:SSLSocket	typeref:typename:SSL_CTX *
+~SSLSocket	ssl.cpp	/^SSLSocket::~SSLSocket() {$/;"	f	class:SSLSocket

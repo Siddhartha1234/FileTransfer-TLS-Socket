@@ -16,8 +16,6 @@ Server::Server(int port_number, int max_num_clients, int max_buffer_size) {
   this->server_address.sin_family = AF_INET;
   this->server_address.sin_addr.s_addr = INADDR_ANY;
   this->server_address.sin_port = htons(this->port_number);
-
-  this->accept_clients();
 }
 
 void Server::accept_clients() {
