@@ -16,10 +16,20 @@ Server::Server(int port_number, int max_num_clients, int max_buffer_size) {
   this->server_address.sin_family = AF_INET;
   this->server_address.sin_addr.s_addr = INADDR_ANY;
   this->server_address.sin_port = htons(this->port_number);
+
+  if (bind(this->sockfd, (struct sockaddr *)&this->server_address,
+           sizeof(this->server_address)) < 0) {
+    perror("Error on binding to socket: ");
+    exit(-1);
+  }
+
+  if (listen(this->sockfd, this->max_num_clients) < 0) {
+    perror("Error listening on socket: ");
+    exit(-1);
+  }
 }
 
 void Server::accept_clients() {
-  listen(this->sockfd, this->max_num_clients);
   struct sockaddr_in client_address;
   int len = sizeof(struct sockaddr_in);
 
