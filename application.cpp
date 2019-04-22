@@ -27,6 +27,7 @@ void Application::run() {
     int cnt = 0;
     while (cnt < 5) {
       this->client->send_msg("Hello!");
+      cnt++;
     }
   }
 }

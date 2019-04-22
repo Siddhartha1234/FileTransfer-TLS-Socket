@@ -20,9 +20,9 @@ int main(int argc, char *argv[]) {
 
     Application app("server");
     app.config_server(port_number, max_conns, 1000);
-    app.config_certificates("/etc/ssl/certs/inter-cse.pem",
-                            "/etc/ssl/private/inter-cse.key",
-                            "/etc/ssl/certs/chain-cse.pem");
+    app.config_certificates("/etc/ssl/certs/cse-inter.pem",
+                            "/etc/ssl/private/cse-inter.key",
+                            "/etc/ssl/certs/cse-chain.pem");
     app.run();
   }
 }
