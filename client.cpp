@@ -12,9 +12,20 @@ Client::Client(string server_addr, int serv_port_number) {
   this->server_address.sin_port = htons(serv_port_number);
   inet_pton(AF_INET, server_addr.c_str(), &server_address.sin_addr);
 
+  this->sslctx = SSL_CTX_new(TLS_client_method());
+}
+
+void Client::connect_server() {
   if (connect(this->sockfd, (struct sockaddr *)&this->server_address,
               sizeof(this->server_address)) < 0) {
     perror("Connection to server failed");
+    exit(-1);
+  }
+  this->cSSL = SSL_new(this->sslctx);
+  SSL_set_fd(this->cSSL, this->sockfd);
+
+  if (SSL_connect(this->cSSL) < 0) {
+    ERR_print_errors_fp(stderr);
     exit(-1);
   }
 }

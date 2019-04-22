@@ -5,6 +5,7 @@ Server::Server(int port_number, int max_num_clients, int max_buffer_size) {
   this->max_num_clients = max_num_clients;
   this->max_buffer_size = max_buffer_size;
 
+  this->sslctx = SSL_CTX_new(TLS_server_method());
   this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
   if (this->sockfd <= 0) {

@@ -23,6 +23,7 @@ void Application::run() {
   if (this->mode == "server") {
     this->server->accept_clients();
   } else {
+    this->client->connect_server();
     int cnt = 0;
     while (cnt < 5) {
       this->client->send_msg("Hello!");

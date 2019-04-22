@@ -24,5 +24,6 @@ private:
 
 public:
   Client(string server_addr, int serv_port_number);
+  void connect_server();
   void send_msg(string message);
 };

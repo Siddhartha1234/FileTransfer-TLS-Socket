@@ -19,6 +19,7 @@ client	application.h	/^  Client *client;$/;"	m	class:Application	typeref:typenam
 config_certificates	application.cpp	/^void Application::config_certificates(string cert_path, string prv_path,$/;"	f	class:Application	typeref:typename:void
 config_client	application.cpp	/^void Application::config_client(string server_addr, int serv_port_number) {$/;"	f	class:Application	typeref:typename:void
 config_server	application.cpp	/^void Application::config_server(int port_number, int max_num_clients,$/;"	f	class:Application	typeref:typename:void
+connect_server	client.cpp	/^void Client::connect_server() {$/;"	f	class:Client	typeref:typename:void
 main	test_app.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 max_buffer_size	server.h	/^  int max_buffer_size;$/;"	m	class:Server	typeref:typename:int
 max_num_clients	server.h	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int
