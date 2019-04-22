@@ -49,6 +49,8 @@ void Server::accept_clients() {
   while (true) {
     char recv_msg[this->max_buffer_size];
     int x = SSL_read(this->cSSL, recv_msg, this->max_buffer_size);
+    if(x == 0)
+      break;
     recv_msg[x] = '\0';
     printf("%s\n", recv_msg);
   }
