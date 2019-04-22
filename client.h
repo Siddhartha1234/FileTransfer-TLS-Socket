@@ -23,7 +23,8 @@ private:
   struct sockaddr_in server_address;
 
 public:
-  Client(string server_addr, int serv_port_number);
+  int max_buffer_size;
+  Client(string server_addr, int serv_port_number, int max_buffer_size);
   void connect_server();
-  void send_msg(string message);
+  void send_file_chunk(char *message, int bytes);
 };

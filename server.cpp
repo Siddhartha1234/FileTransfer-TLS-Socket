@@ -1,9 +1,13 @@
 #include "server.h"
 
-Server::Server(int port_number, int max_num_clients, int max_buffer_size) {
+Server::Server(int port_number, int max_num_clients, int max_buffer_size,
+               string file_location) {
   this->port_number = port_number;
   this->max_num_clients = max_num_clients;
   this->max_buffer_size = max_buffer_size;
+  this->file_location = file_location;
+  if (this->file_location[this->file_location.length() - 1] != '/')
+    this->file_location += '/';
 
   this->sslctx = SSL_CTX_new(TLS_server_method());
   this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -30,7 +34,7 @@ Server::Server(int port_number, int max_num_clients, int max_buffer_size) {
   }
 }
 
-void Server::accept_clients() {
+void Server::accept_file() {
   struct sockaddr_in client_address;
   int len = sizeof(struct sockaddr_in);
 
@@ -46,14 +50,26 @@ void Server::accept_clients() {
     exit(-1);
   }
 
+  // Receive file name
+  char file_name[this->max_buffer_size];
+
+  int flen = SSL_read(this->cSSL, file_name, this->max_buffer_size);
+  file_name[flen] = '\0';
+
+  // Make new file buffer at location
+
+  FILE *fp = fopen((this->file_location + string(file_name)).c_str(), "wb");
+
   while (true) {
     char recv_msg[this->max_buffer_size];
     int x = SSL_read(this->cSSL, recv_msg, this->max_buffer_size);
-    if(x == 0)
+    if (x == 0)
       break;
-    recv_msg[x] = '\0';
-    printf("%s\n", recv_msg);
+    // write chunk to file buffer
+    fwrite(recv_msg, 1, x, fp);
   }
+  // close the file
+  fclose(fp);
 }
 
 void Server::send_msg(string message) {

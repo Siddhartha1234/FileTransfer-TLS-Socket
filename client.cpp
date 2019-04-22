@@ -1,7 +1,8 @@
 #include "client.h"
 
-Client::Client(string server_addr, int serv_port_number) {
+Client::Client(string server_addr, int serv_port_number, int max_buffer_size) {
   this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  this->max_buffer_size = max_buffer_size;
 
   if (this->sockfd <= 0) {
     perror("Error initializing socket: ");
@@ -30,7 +31,6 @@ void Client::connect_server() {
   }
 }
 
-void Client::send_msg(string message) {
-  const char *mess_buffer = message.c_str();
-  SSL_write(this->cSSL, mess_buffer, strlen(mess_buffer));
+void Client::send_file_chunk(char *message, int bytes) {
+  SSL_write(this->cSSL, message, bytes);
 }

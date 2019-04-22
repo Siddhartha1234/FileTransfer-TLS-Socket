@@ -24,10 +24,12 @@ private:
   int port_number;
   int max_num_clients;
   int max_buffer_size;
+  string file_location;
 
 public:
-  Server(int port_number, int max_num_clients, int max_buffer_size = 256);
+  Server(int port_number, int max_num_clients, int max_buffer_size,
+         string file_location);
 
-  void accept_clients();
+  void accept_file();
   void send_msg(string message);
 };

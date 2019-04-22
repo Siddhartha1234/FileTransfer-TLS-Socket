@@ -7,31 +7,40 @@
 !_TAG_PROGRAM_VERSION	0.0.0	/54c1c2b8/
 Application	application.cpp	/^Application::Application(string mode) { this->mode = mode; }$/;"	f	class:Application
 Application	application.h	/^class Application {$/;"	c
-Client	client.cpp	/^Client::Client(string server_addr, int serv_port_number) {$/;"	f	class:Client
+BIN	Makefile	/^BIN = app$/;"	m
+Client	client.cpp	/^Client::Client(string server_addr, int serv_port_number, int max_buffer_size) {$/;"	f	class:Client
 Client	client.h	/^class Client : public SSLSocket {$/;"	c
+LIBS	Makefile	/^LIBS = -lssl -lcrypto$/;"	m
+SRCS	Makefile	/^SRCS = *.cpp utils.hpp $/;"	m
 SSLSocket	ssl.cpp	/^SSLSocket::SSLSocket() {$/;"	f	class:SSLSocket
 SSLSocket	ssl.h	/^class SSLSocket {$/;"	c
-Server	server.cpp	/^Server::Server(int port_number, int max_num_clients, int max_buffer_size) {$/;"	f	class:Server
+Server	server.cpp	/^Server::Server(int port_number, int max_num_clients, int max_buffer_size,$/;"	f	class:Server
 Server	server.h	/^class Server : public SSLSocket {$/;"	c
-accept_clients	server.cpp	/^void Server::accept_clients() {$/;"	f	class:Server	typeref:typename:void
+accept_file	server.cpp	/^void Server::accept_file() {$/;"	f	class:Server	typeref:typename:void
+app	Makefile	/^app:$/;"	t
 cSSL	ssl.h	/^  SSL *cSSL;$/;"	m	class:SSLSocket	typeref:typename:SSL *
 client	application.h	/^  Client *client;$/;"	m	class:Application	typeref:typename:Client *
 config_certificates	application.cpp	/^void Application::config_certificates(string cert_path, string prv_path,$/;"	f	class:Application	typeref:typename:void
-config_client	application.cpp	/^void Application::config_client(string server_addr, int serv_port_number) {$/;"	f	class:Application	typeref:typename:void
+config_client	application.cpp	/^void Application::config_client(string server_addr, int serv_port_number,$/;"	f	class:Application	typeref:typename:void
 config_server	application.cpp	/^void Application::config_server(int port_number, int max_num_clients,$/;"	f	class:Application	typeref:typename:void
 connect_server	client.cpp	/^void Client::connect_server() {$/;"	f	class:Client	typeref:typename:void
+file_location	server.h	/^  string file_location;$/;"	m	class:Server	typeref:typename:string
+file_path	application.h	/^  string file_path;$/;"	m	class:Application	typeref:typename:string
+get_file_name	utils.hpp	/^string get_file_name(string file_path) {$/;"	f	typeref:typename:string
 main	test_app.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
+max_buffer_size	client.h	/^  int max_buffer_size;$/;"	m	class:Client	typeref:typename:int
 max_buffer_size	server.h	/^  int max_buffer_size;$/;"	m	class:Server	typeref:typename:int
 max_num_clients	server.h	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int
 mode	application.h	/^  string mode;$/;"	m	class:Application	typeref:typename:string
 port_number	server.h	/^  int port_number;$/;"	m	class:Server	typeref:typename:int
 run	application.cpp	/^void Application::run() {$/;"	f	class:Application	typeref:typename:void
-send_msg	client.cpp	/^void Client::send_msg(string message) {$/;"	f	class:Client	typeref:typename:void
+send_file_chunk	client.cpp	/^void Client::send_file_chunk(char *message, int bytes) {$/;"	f	class:Client	typeref:typename:void
 send_msg	server.cpp	/^void Server::send_msg(string message) {$/;"	f	class:Server	typeref:typename:void
 server	application.h	/^  Server *server;$/;"	m	class:Application	typeref:typename:Server *
 server_address	client.h	/^  struct sockaddr_in server_address;$/;"	m	class:Client	typeref:struct:sockaddr_in
 server_address	server.h	/^  struct sockaddr_in server_address;$/;"	m	class:Server	typeref:struct:sockaddr_in
 set_certificates	ssl.cpp	/^void SSLSocket::set_certificates(string cert_path, string prv_key_path,$/;"	f	class:SSLSocket	typeref:typename:void
+sha256	utils.hpp	/^string sha256(const string str) {$/;"	f	typeref:typename:string
 sockfd	client.h	/^  int sockfd;$/;"	m	class:Client	typeref:typename:int
 sockfd	server.h	/^  int sockfd;$/;"	m	class:Server	typeref:typename:int
 sslctx	ssl.h	/^  SSL_CTX *sslctx;$/;"	m	class:SSLSocket	typeref:typename:SSL_CTX *
