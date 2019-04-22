@@ -13,6 +13,7 @@
 #include <openssl/ssl.h>
 
 #include "ssl.h"
+#include "utils.hpp"
 
 using namespace std;
 

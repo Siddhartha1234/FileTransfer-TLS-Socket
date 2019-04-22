@@ -57,8 +57,12 @@ void Server::accept_file() {
   file_name[flen] = '\0';
 
   // Make new file buffer at location
+  char *path = (char *)(this->file_location + string(file_name)).c_str();
+  FILE *fp = fopen(path, "wb");
 
-  FILE *fp = fopen((this->file_location + string(file_name)).c_str(), "wb");
+  // Receive md5 hash
+  char sha_buffer[65];
+  int sha_size = SSL_read(this->cSSL, sha_buffer, this->max_buffer_size);
 
   while (true) {
     char recv_msg[this->max_buffer_size];
@@ -67,6 +71,15 @@ void Server::accept_file() {
       break;
     // write chunk to file buffer
     fwrite(recv_msg, 1, x, fp);
+  }
+
+  char check_sha[65];
+  sha256_file(path, check_sha);
+
+  if (strcmp(check_sha, sha_buffer) == 0) {
+    printf("SHA 256 hash verified !\n");
+  } else {
+    printf("SHA 256 hash doesn't match, file sent is corrupt!\n");
   }
   // close the file
   fclose(fp);

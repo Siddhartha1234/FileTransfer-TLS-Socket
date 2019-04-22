@@ -1,5 +1,8 @@
 LIBS = -lssl -lcrypto
 BIN = app
-SRCS = *.cpp utils.hpp 
+SRCS = *.cpp 
 app:
 	g++ -o $(BIN) $(SRCS) $(LIBS) 
+
+clean:
+	rm app

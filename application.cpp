@@ -32,6 +32,11 @@ void Application::run() {
     this->client->send_file_chunk((char *)file_name.c_str(),
                                   file_name.length());
 
+    char sha_buffer[65];
+    sha256_file((char *)this->file_path.c_str(), sha_buffer);
+
+    this->client->send_file_chunk(sha_buffer, 65);
+
     FILE *fp = fopen(file_path.c_str(), "rb");
     int bytes;
     char send_buffer[this->client->max_buffer_size];
