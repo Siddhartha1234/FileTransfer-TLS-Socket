@@ -1,10 +1,12 @@
 #include "progress_bar.h"
 
+//Init width and progress
 ProgressBar::ProgressBar(int width) {
   this->width = width;
   this->progress = 0;
 }
 
+//Update and render progress 
 void ProgressBar::update_progress(int pct) {
   this->progress = pct;
   string prog_bar = "[";

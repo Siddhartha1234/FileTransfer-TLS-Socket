@@ -1,5 +1,6 @@
 #include "client.h"
 
+// Initialize client
 Client::Client(string server_addr, int serv_port_number, int max_buffer_size) {
   this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
   this->max_buffer_size = max_buffer_size;
@@ -16,12 +17,15 @@ Client::Client(string server_addr, int serv_port_number, int max_buffer_size) {
   this->sslctx = SSL_CTX_new(TLS_client_method());
 }
 
+// Connect to server
 void Client::connect_server() {
   if (connect(this->sockfd, (struct sockaddr *)&this->server_address,
               sizeof(this->server_address)) < 0) {
     perror("Connection to server failed");
     exit(-1);
   }
+
+  // Make SSL socket
   this->cSSL = SSL_new(this->sslctx);
   SSL_set_fd(this->cSSL, this->sockfd);
 
@@ -31,6 +35,7 @@ void Client::connect_server() {
   }
 }
 
+// Send to server
 void Client::send_file_chunk(char *message, int bytes) {
   SSL_write(this->cSSL, message, bytes);
 }

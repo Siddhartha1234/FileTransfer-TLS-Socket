@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Progress bar class
 class ProgressBar {
 private:
   int width;

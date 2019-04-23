@@ -31,13 +31,14 @@ void SSLSocket::set_certificates(string cert_path, string prv_key_path,
     ERR_print_errors_fp(stderr);
     exit(-1);
   }
-
+  //Check if public key & public key match
   if (SSL_CTX_check_private_key(this->sslctx) < 0) {
     ERR_print_errors_fp(stderr);
     exit(-1);
   }
 }
 
+//Cleanup SSL inits
 SSLSocket::~SSLSocket() {
   ERR_free_strings();
   EVP_cleanup();

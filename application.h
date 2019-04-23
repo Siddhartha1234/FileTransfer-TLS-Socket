@@ -1,9 +1,9 @@
+#include <chrono>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <string>
-#include <chrono>
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -22,9 +22,9 @@
 #include "progress_bar.h"
 #include "utils.hpp"
 
-
 using namespace std;
 
+// Application class
 class Application {
   Server *server;
   Client *client;

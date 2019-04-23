@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// get file name for a given file path
 inline string get_file_name(string file_path) {
   int ind = file_path.length() - 1;
   string file_name = "";
@@ -18,6 +19,7 @@ inline string get_file_name(string file_path) {
   return file_name;
 }
 
+// get hash string string from a hash digest
 inline void sha256_hash_string(unsigned char hash[SHA256_DIGEST_LENGTH],
                                char outputBuffer[65]) {
   int i = 0;
@@ -28,7 +30,7 @@ inline void sha256_hash_string(unsigned char hash[SHA256_DIGEST_LENGTH],
 
   outputBuffer[64] = 0;
 }
-
+// get SHA-256 hash for a given file
 inline int sha256_file(char *path, char outputBuffer[65]) {
   FILE *file = fopen(path, "rb");
   if (!file)

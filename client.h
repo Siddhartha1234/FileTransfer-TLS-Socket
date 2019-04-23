@@ -17,6 +17,7 @@
 
 using namespace std;
 
+// Client class
 class Client : public SSLSocket {
 private:
   int sockfd;

@@ -6,6 +6,7 @@
 #include <string>
 using namespace std;
 
+//SSL Socket class
 class SSLSocket {
 protected:
   SSL_CTX *sslctx;

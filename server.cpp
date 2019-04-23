@@ -80,6 +80,9 @@ void Server::accept_file() {
   while (true) {
     char recv_msg[this->max_buffer_size];
     int x = SSL_read(this->cSSL, recv_msg, this->max_buffer_size);
+    if (x == 0)
+      break;
+    
     bytes_recvd += x;
     this->pbar->update_progress((bytes_recvd * 100) / file_size);
     if (x == 0)
