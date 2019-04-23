@@ -1,6 +1,9 @@
 #include "application.h"
 
-Application::Application(string mode) { this->mode = mode; }
+Application::Application(string mode) { 
+  this->mode = mode; 
+  this->pbar = new ProgressBar(50);
+}
 void Application::config_server(int port_number, int max_num_clients,
                                 int max_buffer_size, string file_location) {
   this->server =
@@ -32,18 +35,27 @@ void Application::run() {
     this->client->send_file_chunk((char *)file_name.c_str(),
                                   file_name.length());
 
+    cout << "Sending file : " << file_name << "\n";
     char sha_buffer[65];
     sha256_file((char *)this->file_path.c_str(), sha_buffer);
 
     this->client->send_file_chunk(sha_buffer, 65);
 
+    struct stat st;
+    stat(file_path.c_str(), &st);
+    int file_size = st.st_size;
+
     FILE *fp = fopen(file_path.c_str(), "rb");
     int bytes;
     char send_buffer[this->client->max_buffer_size];
-
+    int bytes_sent = 0;
     while ((bytes = fread(send_buffer, 1, this->client->max_buffer_size, fp)) >
            0) {
       this->client->send_file_chunk(send_buffer, bytes);
+      bytes_sent += bytes;
+      
+      int pct = (bytes_sent * 100) / file_size;
+      pbar->update_progress(pct);
     }
   }
 }

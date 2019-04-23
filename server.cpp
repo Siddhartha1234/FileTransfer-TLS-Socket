@@ -73,16 +73,18 @@ void Server::accept_file() {
     fwrite(recv_msg, 1, x, fp);
   }
 
+  // close the file
+  fclose(fp);
+
   char check_sha[65];
   sha256_file(path, check_sha);
-
+  printf("Sent SHA-256 hash:%s\n", sha_buffer);
+  printf("Received SHA-256 hash:%s\n", check_sha);
   if (strcmp(check_sha, sha_buffer) == 0) {
     printf("SHA 256 hash verified !\n");
   } else {
     printf("SHA 256 hash doesn't match, file sent is corrupt!\n");
   }
-  // close the file
-  fclose(fp);
 }
 
 void Server::send_msg(string message) {

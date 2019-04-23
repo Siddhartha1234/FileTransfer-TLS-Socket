@@ -5,7 +5,9 @@
 
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/types.h>
+
 #include <unistd.h>
 
 #include <openssl/bio.h>
@@ -15,6 +17,7 @@
 #include "client.h"
 #include "server.h"
 
+#include "progress_bar.h"
 #include "utils.hpp"
 
 using namespace std;
@@ -24,6 +27,7 @@ class Application {
   Client *client;
   string mode;
   string file_path;
+  ProgressBar *pbar;
 
 public:
   Application(string mode = "client");
