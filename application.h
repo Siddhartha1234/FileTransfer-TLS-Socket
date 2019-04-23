@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
+#include <chrono>
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -20,6 +22,7 @@
 #include "progress_bar.h"
 #include "utils.hpp"
 
+
 using namespace std;
 
 class Application {
@@ -30,7 +33,7 @@ class Application {
   ProgressBar *pbar;
 
 public:
-  Application(string mode = "client");
+  Application(string mode = "send");
   void config_server(int port_number, int max_num_clients, int max_buffer_size,
                      string file_location);
   void config_client(string server_addr, int serv_port_number,

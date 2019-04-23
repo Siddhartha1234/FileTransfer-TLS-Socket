@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <chrono>
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -12,6 +13,7 @@
 #include <openssl/err.h>
 #include <openssl/ssl.h>
 
+#include "progress_bar.h"
 #include "ssl.h"
 #include "utils.hpp"
 
@@ -26,6 +28,8 @@ private:
   int max_num_clients;
   int max_buffer_size;
   string file_location;
+
+  ProgressBar *pbar;
 
 public:
   Server(int port_number, int max_num_clients, int max_buffer_size,

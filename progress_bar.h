@@ -1,5 +1,8 @@
+#pragma once
 #include <iostream>
 #include <string>
+
+#include <chrono>
 
 using namespace std;
 
@@ -7,7 +10,6 @@ class ProgressBar {
 private:
   int width;
   int progress;
-  int prev_progress;
 
 public:
   ProgressBar(int width);

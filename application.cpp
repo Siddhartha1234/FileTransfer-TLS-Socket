@@ -1,7 +1,7 @@
 #include "application.h"
 
-Application::Application(string mode) { 
-  this->mode = mode; 
+Application::Application(string mode) {
+  this->mode = mode;
   this->pbar = new ProgressBar(50);
 }
 void Application::config_server(int port_number, int max_num_clients,
@@ -18,7 +18,7 @@ void Application::config_client(string server_addr, int serv_port_number,
 
 void Application::config_certificates(string cert_path, string prv_path,
                                       string chain_path) {
-  if (this->mode == "server") {
+  if (this->mode == "receive") {
     this->server->set_certificates(cert_path, prv_path, chain_path);
   } else {
     this->client->set_certificates(cert_path, prv_path, chain_path);
@@ -26,7 +26,7 @@ void Application::config_certificates(string cert_path, string prv_path,
 }
 
 void Application::run() {
-  if (this->mode == "server") {
+  if (this->mode == "receive") {
     this->server->accept_file();
   } else {
     this->client->connect_server();
@@ -36,6 +36,9 @@ void Application::run() {
                                   file_name.length());
 
     cout << "Sending file : " << file_name << "\n";
+
+    auto start_time = chrono::high_resolution_clock::now();
+
     char sha_buffer[65];
     sha256_file((char *)this->file_path.c_str(), sha_buffer);
 
@@ -45,6 +48,9 @@ void Application::run() {
     stat(file_path.c_str(), &st);
     int file_size = st.st_size;
 
+    char *fs = (char *)to_string(file_size).c_str();
+    this->client->send_file_chunk(fs, strlen(fs));
+
     FILE *fp = fopen(file_path.c_str(), "rb");
     int bytes;
     char send_buffer[this->client->max_buffer_size];
@@ -53,9 +59,13 @@ void Application::run() {
            0) {
       this->client->send_file_chunk(send_buffer, bytes);
       bytes_sent += bytes;
-      
+
       int pct = (bytes_sent * 100) / file_size;
       pbar->update_progress(pct);
     }
+
+    auto end_time = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> elapsed = end_time - start_time;
+    cout << "File sent in : " << elapsed.count() / 1000.0 << " seconds\n";
   }
 }

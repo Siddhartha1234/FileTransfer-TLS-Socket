@@ -9,6 +9,7 @@ Server::Server(int port_number, int max_num_clients, int max_buffer_size,
   if (this->file_location[this->file_location.length() - 1] != '/')
     this->file_location += '/';
 
+  this->pbar = new ProgressBar(50);
   this->sslctx = SSL_CTX_new(TLS_server_method());
   this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -50,29 +51,44 @@ void Server::accept_file() {
     exit(-1);
   }
 
+  auto start_time = chrono::high_resolution_clock::now();
+
   // Receive file name
   char file_name[this->max_buffer_size];
 
   int flen = SSL_read(this->cSSL, file_name, this->max_buffer_size);
   file_name[flen] = '\0';
 
+  printf("Receiving file : %s\n", file_name);
+
   // Make new file buffer at location
   char *path = (char *)(this->file_location + string(file_name)).c_str();
   FILE *fp = fopen(path, "wb");
+
+  // Receive file size
+  char fs[this->max_buffer_size];
+  int x = SSL_read(this->cSSL, fs, this->max_buffer_size);
+  fs[x] = '\0';
+  int file_size = atoi(fs);
 
   // Receive md5 hash
   char sha_buffer[65];
   int sha_size = SSL_read(this->cSSL, sha_buffer, this->max_buffer_size);
 
+  int bytes_recvd = 0;
   while (true) {
     char recv_msg[this->max_buffer_size];
     int x = SSL_read(this->cSSL, recv_msg, this->max_buffer_size);
+    bytes_recvd += x;
+    this->pbar->update_progress((bytes_recvd * 100) / file_size);
     if (x == 0)
       break;
     // write chunk to file buffer
+
     fwrite(recv_msg, 1, x, fp);
   }
 
+  auto end_time = chrono::high_resolution_clock::now();
   // close the file
   fclose(fp);
 
@@ -85,6 +101,8 @@ void Server::accept_file() {
   } else {
     printf("SHA 256 hash doesn't match, file sent is corrupt!\n");
   }
+  chrono::duration<double, milli> elapsed = end_time - start_time;
+  cout << "File received in : " << elapsed.count() / 1000.0 << " seconds\n";
 }
 
 void Server::send_msg(string message) {

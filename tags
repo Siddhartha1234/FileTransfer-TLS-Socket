@@ -5,7 +5,7 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/54c1c2b8/
-Application	application.cpp	/^Application::Application(string mode) { $/;"	f	class:Application
+Application	application.cpp	/^Application::Application(string mode) {$/;"	f	class:Application
 Application	application.h	/^class Application {$/;"	c
 BIN	Makefile	/^BIN = app$/;"	m
 Client	client.cpp	/^Client::Client(string server_addr, int serv_port_number, int max_buffer_size) {$/;"	f	class:Client
@@ -33,15 +33,18 @@ get_file_name	utils.hpp	/^inline string get_file_name(string file_path) {$/;"	f	
 main	test_app.cpp	/^int main(int argc, char *argv[]) {$/;"	f	typeref:typename:int
 max_buffer_size	client.h	/^  int max_buffer_size;$/;"	m	class:Client	typeref:typename:int
 max_buffer_size	server.h	/^  int max_buffer_size;$/;"	m	class:Server	typeref:typename:int
+max_buffer_size	test_app.cpp	/^int max_buffer_size = 1000;$/;"	v	typeref:typename:int
+max_conns	test_app.cpp	/^int max_conns = 5;$/;"	v	typeref:typename:int
 max_num_clients	server.h	/^  int max_num_clients;$/;"	m	class:Server	typeref:typename:int
 mode	application.h	/^  string mode;$/;"	m	class:Application	typeref:typename:string
 pbar	application.h	/^  ProgressBar *pbar;$/;"	m	class:Application	typeref:typename:ProgressBar *
+pbar	server.h	/^  ProgressBar *pbar;$/;"	m	class:Server	typeref:typename:ProgressBar *
 port_number	server.h	/^  int port_number;$/;"	m	class:Server	typeref:typename:int
-prev_progress	progress_bar.h	/^  int prev_progress;$/;"	m	class:ProgressBar	typeref:typename:int
 progress	progress_bar.h	/^  int progress;$/;"	m	class:ProgressBar	typeref:typename:int
 run	application.cpp	/^void Application::run() {$/;"	f	class:Application	typeref:typename:void
 send_file_chunk	client.cpp	/^void Client::send_file_chunk(char *message, int bytes) {$/;"	f	class:Client	typeref:typename:void
 send_msg	server.cpp	/^void Server::send_msg(string message) {$/;"	f	class:Server	typeref:typename:void
+serv_port_number	test_app.cpp	/^int serv_port_number = 65080;$/;"	v	typeref:typename:int
 server	application.h	/^  Server *server;$/;"	m	class:Application	typeref:typename:Server *
 server_address	client.h	/^  struct sockaddr_in server_address;$/;"	m	class:Client	typeref:struct:sockaddr_in
 server_address	server.h	/^  struct sockaddr_in server_address;$/;"	m	class:Server	typeref:struct:sockaddr_in
