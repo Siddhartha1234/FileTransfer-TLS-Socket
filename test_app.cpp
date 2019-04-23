@@ -3,15 +3,15 @@
 
 using namespace std;
 
-// Config of where to
+// Config 
 int serv_port_number = 65080;
 int max_buffer_size = 1000;
 int max_conns = 5;
 
 int main(int argc, char *argv[]) {
   if (string(argv[1]) == "send") {
-    string serv_address = string(argv[1]);
-    string file_path = string(argv[2]);
+    string serv_address = string(argv[2]);
+    string file_path = string(argv[3]);
 
     Application app("send");
     app.config_client(serv_address, serv_port_number, max_buffer_size,
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
                             "/etc/ssl/certs/chain-ee.pem");
     app.run();
   } else {
-    string file_location = string(argv[1]);
+    string file_location = string(argv[2]);
 
     Application app("receive");
     app.config_server(serv_port_number, max_conns, max_buffer_size,
