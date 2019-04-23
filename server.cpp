@@ -65,15 +65,16 @@ void Server::accept_file() {
   char *path = (char *)(this->file_location + string(file_name)).c_str();
   FILE *fp = fopen(path, "wb");
 
+  // Receive md5 hash
+  char sha_buffer[65];
+  int sha_size = SSL_read(this->cSSL, sha_buffer, this->max_buffer_size);
+
+
   // Receive file size
   char fs[this->max_buffer_size];
   int x = SSL_read(this->cSSL, fs, this->max_buffer_size);
   fs[x] = '\0';
   int file_size = atoi(fs);
-
-  // Receive md5 hash
-  char sha_buffer[65];
-  int sha_size = SSL_read(this->cSSL, sha_buffer, this->max_buffer_size);
 
   int bytes_recvd = 0;
   while (true) {

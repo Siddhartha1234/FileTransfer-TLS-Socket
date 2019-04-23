@@ -4,6 +4,7 @@ Application::Application(string mode) {
   this->mode = mode;
   this->pbar = new ProgressBar(50);
 }
+
 void Application::config_server(int port_number, int max_num_clients,
                                 int max_buffer_size, string file_location) {
   this->server =
