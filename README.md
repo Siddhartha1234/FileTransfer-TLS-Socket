@@ -12,3 +12,7 @@ Put all certificate file paths, port number and buffer size inside test_app.cpp
 
 #### On the receiving side
 <code> sudo ./app receive FILE_LOCATION </code>
+
+### Demo 
+Sending side ![Sending side](/send.png) 
+Receiving side ![Receiving side](/receive.png) 
