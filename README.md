@@ -3,8 +3,8 @@ File transfer app  using C sockets and OpenSSL that transfers files across entit
 Put all certificate file paths, port number and buffer size inside test_app.cpp
 
 ### Build
-<code> make app //if app binary is not present </code>
-<code> make clean app //is app binary is present </code>
+- <code> make app //if app binary is not present </code>
+- <code> make clean app //is app binary is present </code>
 
 ### Run 
 #### On the sending side: 
